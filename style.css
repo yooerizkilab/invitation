@@ -1,0 +1,1131 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+    --primary-color: #d4a373;
+    --secondary-color: #faedcd;
+    --dark-color: #3a3a3a;
+    --light-color: #fefae0;
+    --accent-color: #ccd5ae;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Loader */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.loader {
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+.loader:before, .loader:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: var(--primary-color);
+}
+
+.loader:before {
+    animation: spin 1.5s linear infinite;
+}
+
+.loader:after {
+    border-top-color: var(--accent-color);
+    animation: spin 1s linear infinite reverse;
+    opacity: 0.5;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Main Container */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Welcome Page - Envelope Style */
+.welcome-page {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('https://i.pinimg.com/originals/5c/4a/3a/5c4a3a9ad917d3e6b528171211e0a25b.jpg') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Envelope Styling */
+.envelope-container {
+    width: 90%;
+    max-width: 500px;
+    perspective: 1000px;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.envelope:before {
+    content: '';
+    display: block;
+    padding-top: 75%; /* Aspect ratio 4:3 */
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #e0c9a6;
+    clip-path: polygon(0 0, 50% 30%, 100% 0, 100% 100%, 0 100%);
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 10;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+.welcome-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.welcome-names {
+    font-size: 3rem;
+    margin: 20px 0;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-date {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.welcome-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-button:hover {
+    background-color: #c09262;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-ornament {
+    max-width: 100px;
+    margin: 15px auto;
+    opacity: 0.8;
+}
+
+/* Detail Page */
+.detail-page {
+    display: none;
+}
+
+.section {
+    padding: 100px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* Section Decorations */
+.section-decoration {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+.section-decoration.top {
+    top: 0;
+}
+
+.section-decoration.bottom {
+    bottom: 0;
+    transform: rotate(180deg);
+}
+
+.section-decoration img {
+    width: 100%;
+    max-height: 80px;
+    object-fit: cover;
+}
+
+/* Gift Animations */
+.gift-animation {
+    max-width: 150px;
+    margin: 30px auto;
+}
+
+.gift-animation img {
+    width: 100%;
+    height: auto;
+}
+
+.gift-animation.center {
+    display: block;
+    margin: 50px auto;
+}
+
+/* Couple Section */
+.couple-section {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://img.freepik.com/free-vector/hand-painted-watercolor-floral-background_52683-67092.jpg') center center/cover;
+    padding: 100px 20px 120px;
+}
+
+.couple-intro {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    line-height: 1.8;
+}
+
+.couple-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.person {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.person-image-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--secondary-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
+
+.person-image-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.person-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.person:hover .person-image {
+    transform: scale(1.1);
+}
+
+.person-name {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.person-desc {
+    color: var(--dark-color);
+    margin-bottom: 15px;
+}
+
+.person-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.person-social a {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.person-social a:hover {
+    color: var(--dark-color);
+    transform: translateY(-3px);
+}
+
+.connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--primary-color);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Event Section */
+.event-section {
+    background: linear-gradient(rgba(250, 237, 205, 0.9), rgba(250, 237, 205, 0.9)), url('https://img.freepik.com/free-vector/wedding-card-with-beautiful-flowers_1035-4714.jpg') center center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    z-index: 2;
+    position: relative;
+}
+
+.event-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.event-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: var(--primary-color);
+}
+
+.event-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.event-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.event-details {
+    margin-bottom: 20px;
+}
+
+.event-date, .event-time, .event-place {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.event-date i, .event-time i, .event-place i {
+    color: var(--primary-color);
+}
+
+.event-map {
+    margin-top: 20px;
+}
+
+.event-map iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* Gallery Section */
+.gallery-section {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://img.freepik.com/free-vector/watercolor-pink-roses-frame-background_52683-30206.jpg') center center/cover;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-icon {
+    color: white;
+    font-size: 2rem;
+}
+
+/* Gift Section */
+.gift-section {
+    background: linear-gradient(rgba(204, 213, 174, 0.8), rgba(204, 213, 174, 0.8)), url('https://img.freepik.com/free-vector/watercolor-stains-abstract-background_52683-61387.jpg') center center/cover;
+}
+
+.gift-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.gift-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease;
+}
+
+.gift-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.gift-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.gift-title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.gift-desc {
+    margin-bottom: 20px;
+}
+
+.gift-details {
+    background-color: var(--light-color);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.gift-copy {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.gift-copy:hover {
+    background-color: #c09262;
+}
+
+/* Comments Section */
+.comments-section {
+    background: linear-gradient(rgba(250, 237, 205, 0.9), rgba(250, 237, 205, 0.9)), url('https://img.freepik.com/free-vector/watercolor-nature-background-with-leaves_52683-59449.jpg') center center/cover;
+}
+
+.comments-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.comments-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comment-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease;
+    transition: all 0.3s ease;
+}
+
+.comment-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.comment-name {
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.comment-message {
+    line-height: 1.6;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+.form-select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    background-color: white;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-submit {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-submit:hover {
+    background-color: #c09262;
+    transform: translateY(-3px);
+}
+
+/* Closing Section */
+.closing-section {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://img.freepik.com/free-vector/elegant-white-background-with-floral-elements_1361-1667.jpg') center center/cover;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.closing-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.closing-image {
+    width: 150px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.closing-image img {
+    width: 100%;
+    height: auto;
+}
+
+.closing-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.closing-verse {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.closing-hearts {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.closing-hearts i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    animation: heartbeat 1.5s infinite;
+}
+
+.closing-hearts i:nth-child(2) {
+    animation-delay: 0.5s;
+    font-size: 1.8rem;
+}
+
+.closing-hearts i:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.2); }
+    70% { transform: scale(1); }
+}
+
+.closing-thanks {
+    max-width: 80%;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+}
+
+.closing-regards {
+    font-family: 'Playfair Display', serif;
+    font-weight: normal;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.closing-names {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.closing-families {
+    font-style: italic;
+    color: var(--dark-color);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://weddingmarket.com/storage/images/artikelideacontent/new/fbe6de2a841e909d1e40555d536eb4dfc5ecf4eb.webp') repeat;
+    opacity: 0.05;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-names {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.footer-date {
+    margin-bottom: 30px;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.footer-social a {
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-credit {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.footer-credit a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Music Player */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.music-player:hover {
+    transform: scale(1.1);
+}
+
+.music-player i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background-color: var(--primary-color);
+    color: white;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-number:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    animation: zoomIn 0.3s ease;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 5px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(-50%);
+}
+
+.modal-prev, .modal-next {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-prev:hover, .modal-next:hover {
+    color: var(--primary-color);
+}
+
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.scroll-indicator-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .welcome-names {
+        font-size: 2.2rem;
+    }
+    
+    .welcome-date {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .countdown {
+        gap: 10px;
+    }
+    
+    .countdown-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+    
+    .connector {
+        font-size: 2rem;
+    }
+    
+    .person-image-container {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .person-name {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-content {
+        padding: 30px 20px;
+    }
+    
+    .welcome-names {
+        font-size: 1.8rem;
+    }
+    
+    .welcome-date {
+        font-size: 1rem;
+    }
+    
+    .section {
+        padding: 60px 15px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .countdown-number {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.6rem;
+    }
+}
+
+/* Page Transition Animation */
+.page-transition {
+    animation: pageTransition 1s ease;
+}
+
+@keyframes pageTransition {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
